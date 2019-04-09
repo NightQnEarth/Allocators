@@ -21,13 +21,12 @@ public:
 
     int& operator[] (const int index)
     {
-        if (index < 0 || index >= Length)
-            throw out_of_range("Index out of array range.");
+        prepareProcessCustomIndex(index);
 
         return memoryBlock[index];
     }
 
-    void push(int item)
+    void push(const int item)
     {
         set(item, Length);
     }
@@ -36,23 +35,22 @@ public:
     {
         if (Length-- == 0) throw out_of_range("Array instance is empty.");
 
-        if (memoryBlockSize - Length > START_BLOCK_SIZE)
+        if (capacity - Length > getMemoryBlockCapacity(START_BLOCK_SIZE))
             reduceArray();
 
         return memoryBlock[Length];
     }
 
-    int get(int index)
+    int get(const int index)
     {
-        if (index < 0 || index >= Length)
-            throw out_of_range("Index out of array range.");
-
-        return memoryBlock[index];
+        return (*this)[index];
     }
 
-    void set(int item, int index)
+    void set(const int item, const int index)
     {
-        if (index > memoryBlockSize) enlargeArray();
+        while (index > capacity)
+            enlargeArray();
+
         if(index >= Length) Length = index + 1;
 
         memoryBlock[index] = item;
@@ -61,7 +59,7 @@ public:
     void removeAll()
     {
         if (memoryBlockSize > START_BLOCK_SIZE)
-            resizeArray(false, memoryBlockSize - START_BLOCK_SIZE);
+            resizeArray(false, memoryBlockSize - START_BLOCK_SIZE, false);
 
         clearMemoryBlock();
     }
@@ -69,30 +67,46 @@ public:
 private:
     int* memoryBlock = (int*)malloc(START_BLOCK_SIZE);
     int memoryBlockSize = START_BLOCK_SIZE;
+    int capacity = getMemoryBlockCapacity(memoryBlockSize);
 
     void enlargeArray() { resizeArray(true, START_BLOCK_SIZE); }
 
     void reduceArray() { resizeArray(false, START_BLOCK_SIZE); }
 
-    void resizeArray(bool enlarge, int bytesCount)
+    void resizeArray(const bool enlarge, const int addingBytesCount, const bool saveValues = true)
     {
-        memoryBlockSize += enlarge ? bytesCount : -bytesCount;
+        memoryBlockSize += enlarge ? addingBytesCount : -addingBytesCount;
         int* newMemoryBlock = (int*)malloc(memoryBlockSize);
 
-        for (int i = 0; i < Length; ++i)
-            newMemoryBlock[i] = memoryBlock[i];
+        if (saveValues)
+            for (int i = 0; i < Length; ++i)
+                newMemoryBlock[i] = memoryBlock[i];
 
         free(memoryBlock);
 
         memoryBlock = newMemoryBlock;
+        capacity = getMemoryBlockCapacity(memoryBlockSize);
     }
 
     void clearMemoryBlock()
     {
-        for (int i = 0; i < memoryBlockSize; ++i)
+        for (int i = 0; i < capacity; ++i)
             memoryBlock[i] = 0;
 
         Length = 0;
+    }
+
+    void prepareProcessCustomIndex(int index)
+    {
+        while (index > capacity)
+            enlargeArray();
+
+        if(index >= Length) Length = index + 1;
+    }
+
+    static int getMemoryBlockCapacity(int blockSize)
+    {
+        return blockSize / sizeof(int);
     }
 };
 
@@ -100,24 +114,26 @@ int main()
 {
     Array arr;
 
-    cout << "sizeof(arr): " << sizeof(arr) << endl;
-
-    arr[5] = 10;
-    arr.push(-3);
+    arr[300000] = 10;
+    arr.push(456);
+    cout << "arr.get(arr.Length - 1): " << arr.get(arr.Length - 1) << endl;
     arr.pop();
-    arr.get(0);
-    arr.set(1, 3);
+    arr.set(789, 3);
 
     for (int i = 0; i < arr.Length; ++i)
     {
-        cout << arr[i] << ' ';
+        cout << arr[i] << '|';
     }
+
+    cout << endl;
 
     arr.removeAll();
 
+    cout << "arr.Length: " << arr.Length << endl;
+
     for (int i = 0; i < arr.Length; ++i)
     {
-        cout << arr[i] << ' ';
+        cout << arr[i] << '|';
     }
 
     return 0;
