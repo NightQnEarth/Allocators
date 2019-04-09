@@ -3,4 +3,4 @@ project(Allocator)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Allocator main.cpp)
+add_executable(Allocator main.cpp Array.h LineAllocator.cpp LineAllocator.h)
