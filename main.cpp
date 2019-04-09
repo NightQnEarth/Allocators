@@ -21,7 +21,12 @@ public:
 
     int& operator[] (const int index)
     {
-        prepareProcessCustomIndex(index);
+        if (index < 0) throw out_of_range("Negative index is not valid.");
+
+        while (index > capacity)
+            enlargeArray();
+
+        if(index >= Length) Length = index + 1;
 
         return memoryBlock[index];
     }
@@ -96,14 +101,6 @@ private:
         Length = 0;
     }
 
-    void prepareProcessCustomIndex(int index)
-    {
-        while (index > capacity)
-            enlargeArray();
-
-        if(index >= Length) Length = index + 1;
-    }
-
     static int getMemoryBlockCapacity(int blockSize)
     {
         return blockSize / sizeof(int);
@@ -112,28 +109,33 @@ private:
 
 int main()
 {
-    Array arr;
-
-    arr[300000] = 10;
-    arr.push(456);
-    cout << "arr.get(arr.Length - 1): " << arr.get(arr.Length - 1) << endl;
-    arr.pop();
-    arr.set(789, 3);
-
-    for (int i = 0; i < arr.Length; ++i)
+    try
     {
-        cout << arr[i] << '|';
+        Array arr;
+
+        arr[300000] = 10;
+        arr.push(456);
+        cout << "arr.get(arr.Length - 1): " << arr.get(arr.Length - 1) << endl;
+        arr.pop();
+        arr.set(789, 3);
+
+        for (int i = 0; i < arr.Length; ++i)
+            cout << arr[i] << '|';
+
+        cout << endl;
+
+        arr.removeAll();
+
+        cout << "arr.Length: " << arr.Length << endl;
+
+        for (int i = 0; i < arr.Length; ++i)
+            cout << arr[i] << '|';
+
     }
-
-    cout << endl;
-
-    arr.removeAll();
-
-    cout << "arr.Length: " << arr.Length << endl;
-
-    for (int i = 0; i < arr.Length; ++i)
+    catch (const exception& exception)
     {
-        cout << arr[i] << '|';
+        cout << exception.what();
+        return 1;
     }
 
     return 0;
