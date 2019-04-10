@@ -1,14 +1,14 @@
 #include <iostream>
-#include "DoublyLinkedListAllocator.h"
+#include "LinkedListAllocator.h"
 
 using namespace std;
 
-int DoublyLinkedListAllocator::getLength()
+int LinkedListAllocator::getLength()
 {
     return length;
 }
 
-int& DoublyLinkedListAllocator::operator[](const int index)
+int& LinkedListAllocator::operator[](const int index)
 {
     if (index < 0) throw out_of_range("Negative index is not valid.");
     if(index >= length) length = index + 1;
@@ -19,32 +19,35 @@ int& DoublyLinkedListAllocator::operator[](const int index)
     return memoryBlockWithSpecifiedIndex -> memoryBlock[modOfCapacity];
 }
 
-void DoublyLinkedListAllocator::push(const int item)
+void LinkedListAllocator::push(const int item)
 {
     set(item, length);
 }
 
-int DoublyLinkedListAllocator::pop()
+int LinkedListAllocator::pop()
 {
     if (length-- == 0) throw out_of_range("Array instance is empty.");
+
+    int poppedItem = (*this)[length];
+    length--;
 
     if (memoryBlockCount > 1 && getMemoryBlockCapacity() - length >= PULL_SIZE / sizeof(int))
         deleteLastBlock();
 
-    return (*this)[length];
+    return poppedItem;
 }
 
-int DoublyLinkedListAllocator::get(const int index)
+int LinkedListAllocator::get(const int index)
 {
     return (*this)[index];
 }
 
-void DoublyLinkedListAllocator::set(const int item, const int index)
+void LinkedListAllocator::set(const int item, const int index)
 {
     (*this)[index] = item;
 }
 
-void DoublyLinkedListAllocator::removeAll()
+void LinkedListAllocator::removeAll()
 {
     while (memoryBlockCount > 1 && getMemoryBlockCapacity() - length >= PULL_SIZE / sizeof(int))
         deleteLastBlock();
@@ -52,12 +55,12 @@ void DoublyLinkedListAllocator::removeAll()
     length = 0;
 }
 
-int DoublyLinkedListAllocator::getMemoryBlockSize()
+int LinkedListAllocator::getMemoryBlockSize()
 {
     return getMemoryBlockCapacity() * sizeof(int);
 }
 
-int DoublyLinkedListAllocator::getMemoryBlockCapacity()
+int LinkedListAllocator::getMemoryBlockCapacity()
 {
     return memoryBlockCount * lastMemoryBlock -> getMemoryBlockCapacity();
 }

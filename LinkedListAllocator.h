@@ -1,11 +1,11 @@
-#ifndef ALLOCATORS_DOUBLYLINKEDLISTALLOCATOR_H
-#define ALLOCATORS_DOUBLYLINKEDLISTALLOCATOR_H
+#ifndef ALLOCATORS_LINKEDLISTALLOCATOR_H
+#define ALLOCATORS_LINKEDLISTALLOCATOR_H
 
 #include <iostream>
 #include "Allocator.h"
 #include "MemoryBlock.h"
 
-class DoublyLinkedListAllocator : public Allocator
+class LinkedListAllocator : public Allocator
 {
 public:
     int getLength() override;
@@ -21,8 +21,8 @@ public:
 
 protected:
     int length = 0;
-    int memoryBlockCount;
-    MemoryBlock* lastMemoryBlock;
+    int memoryBlockCount = 1;
+    MemoryBlock* lastMemoryBlock = new MemoryBlock();
 
     MemoryBlock* getMemoryBlock(const int index)
     {
@@ -30,18 +30,17 @@ protected:
 
         while (memoryBlockCount * lastMemoryBlock -> getMemoryBlockCapacity() - 1 < index)
         {
-            MemoryBlock newMemoryBlock;
-            newMemoryBlock.previous = lastMemoryBlock;
-            newMemoryBlock.next = nullptr;
-            lastMemoryBlock -> next = &newMemoryBlock;
-            lastMemoryBlock = &newMemoryBlock;
+            auto newMemoryBlock  = new MemoryBlock();
+            newMemoryBlock -> previous = lastMemoryBlock;
+            lastMemoryBlock = newMemoryBlock;
 
             memoryBlockCount++;
         }
 
         MemoryBlock* memoryBlock = lastMemoryBlock;
 
-        while (memoryBlock -> getMemoryBlockCapacity() * (currentBlockNumber - 1) >= index)
+        while (memoryBlock -> previous != nullptr &&
+               memoryBlock -> getMemoryBlockCapacity() * (currentBlockNumber - 1) >= index)
             memoryBlock = memoryBlock -> previous;
 
         return memoryBlock;
@@ -49,9 +48,12 @@ protected:
 
     void deleteLastBlock()
     {
-        lastMemoryBlock = lastMemoryBlock -> previous;
-        lastMemoryBlock -> next = nullptr;
+        memoryBlockCount--;
+
+        MemoryBlock* previous = lastMemoryBlock -> previous;
+        delete(lastMemoryBlock);
+        lastMemoryBlock = previous;
     }
 };
 
-#endif //ALLOCATORS_DOUBLYLINKEDLISTALLOCATOR_H
+#endif //ALLOCATORS_LINKEDLISTALLOCATOR_H

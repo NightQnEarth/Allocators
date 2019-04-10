@@ -2,6 +2,7 @@
 #include "Allocator.h"
 #include "LinearAllocator.h"
 #include "StackAllocator.h"
+#include "LinkedListAllocator.h"
 
 using namespace std;
 
@@ -16,8 +17,8 @@ void testAllocator(Allocator& allocator)
     cout << "Length: " << allocator.getLength() << endl;
     cout << "arr.getMemoryBlockSize(): " << allocator.getMemoryBlockSize() << endl;
     cout << "arr.getMemoryBlockCapacity(): " << allocator.getMemoryBlockCapacity() << endl;
-
     cout << endl;
+
     allocator.pop();
     cout << "allocator.pop();" << endl;
     cout << "Length: " << allocator.getLength() << endl;
@@ -49,8 +50,9 @@ int main()
     {
         LinearAllocator linearAllocator;
         StackAllocator stackAllocator;
+        LinkedListAllocator linkedListAllocator;
 
-        Allocator* allocators[] = {&linearAllocator, &stackAllocator};
+        Allocator* allocators[] = {&linearAllocator, &stackAllocator, &linkedListAllocator};
 
         for (auto & allocator : allocators)
         {

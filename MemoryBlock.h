@@ -7,9 +7,8 @@
 class MemoryBlock : MemoryBlocksContainer
 {
 public:
-    int* memoryBlock = (int*)malloc(getMemoryBlockSize());
+    int* memoryBlock = (int*)malloc(PULL_SIZE);
     MemoryBlock* previous;
-    MemoryBlock* next;
 
     ~MemoryBlock() override;
 
