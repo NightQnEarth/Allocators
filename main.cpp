@@ -1,8 +1,8 @@
 #include <iostream>
-#include "Allocator.h"
-#include "LinearAllocator.h"
-#include "StackAllocator.h"
-#include "LinkedListAllocator.h"
+#include "include/Allocator.h"
+#include "include/LinearAllocator.h"
+#include "include/StackAllocator.h"
+#include "include/LinkedListAllocator.h"
 
 using namespace std;
 

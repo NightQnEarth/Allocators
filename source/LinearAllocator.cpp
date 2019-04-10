@@ -1,4 +1,4 @@
-#include "LinearAllocator.h"
+#include "../include/LinearAllocator.h"
 
 using namespace std;
 
