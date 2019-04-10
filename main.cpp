@@ -47,10 +47,10 @@ int main()
 {
     try
     {
-        LinearAllocator lineAllocator;
+        LinearAllocator linearAllocator;
         StackAllocator stackAllocator;
 
-        Allocator* allocators[] = {&lineAllocator, &stackAllocator};
+        Allocator* allocators[] = {&linearAllocator, &stackAllocator};
 
         for (auto & allocator : allocators)
         {
