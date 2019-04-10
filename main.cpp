@@ -1,11 +1,11 @@
 #include <iostream>
-#include "Array.h"
+#include "Allocator.h"
 #include "LinearAllocator.h"
 #include "StackAllocator.h"
 
 using namespace std;
 
-void testAllocator(Array& allocator)
+void testAllocator(Allocator& allocator)
 {
     cout << "arr.getMemoryBlockSize(): " << allocator.getMemoryBlockSize() << endl;
     cout << "arr.getMemoryBlockCapacity(): " << allocator.getMemoryBlockCapacity() << endl;
@@ -58,7 +58,7 @@ int main()
         LinearAllocator lineAllocator;
         StackAllocator stackAllocator;
 
-        Array* allocators[] = {&lineAllocator, &stackAllocator};
+        Allocator* allocators[] = {&lineAllocator, &stackAllocator};
 
         for (auto & allocator : allocators)
         {

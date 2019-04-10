@@ -1,0 +1,12 @@
+#ifndef ALLOCATORS_DOUBLELINKEDLISTALLOCATOR_H
+#define ALLOCATORS_DOUBLELINKEDLISTALLOCATOR_H
+
+#include "Allocator.h"
+
+class DoubleLinkedListAllocator : public Allocator
+{
+
+};
+
+
+#endif //ALLOCATORS_DOUBLELINKEDLISTALLOCATOR_H

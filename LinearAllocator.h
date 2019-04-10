@@ -1,10 +1,10 @@
 #ifndef ALLOCATOR_LINEARALLOCATOR_H
 #define ALLOCATOR_LINEARALLOCATOR_H
 
-#include "Array.h"
 #include <iostream>
+#include "Allocator.h"
 
-class LinearAllocator : public Array
+class LinearAllocator : public Allocator
 {
 public:
     const int START_BLOCK_SIZE = 1024 * 1024;

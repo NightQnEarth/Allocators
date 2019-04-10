@@ -1,8 +1,8 @@
 #ifndef ALLOCATORS_STACKALLOCATOR_H
 #define ALLOCATORS_STACKALLOCATOR_H
 
-#include "LinearAllocator.h"
 #include <iostream>
+#include "LinearAllocator.h"
 
 class StackAllocator : public LinearAllocator
 {

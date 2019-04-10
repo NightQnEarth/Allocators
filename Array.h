@@ -14,8 +14,6 @@ public:
     virtual void removeAll() = 0;
 
     virtual int getLength() = 0;
-    virtual int getMemoryBlockSize() = 0;
-    virtual int getMemoryBlockCapacity() = 0;
 };
 
 #endif // ALLOCATOR_ARRAY_H
