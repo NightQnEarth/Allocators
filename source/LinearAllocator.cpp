@@ -60,3 +60,23 @@ int LinearAllocator::getMemoryBlockCapacity()
 {
     return memoryBlockSize / sizeof(int);
 }
+
+void LinearAllocator::enlargeBlock()
+{
+    resizeBlock(true, PULL_SIZE);
+}
+
+void LinearAllocator::resizeBlock(const bool enlarge, const int addingBytesCount, const bool saveValues)
+{
+    memoryBlockSize += enlarge ? addingBytesCount : -addingBytesCount;
+    int* newMemoryBlock = (int*)malloc(memoryBlockSize);
+
+    if (saveValues)
+        for (int i = 0; i < length; ++i)
+            newMemoryBlock[i] = memoryBlock[i];
+
+    free(memoryBlock);
+
+    memoryBlock = newMemoryBlock;
+    capacity = getMemoryBlockCapacity();
+}

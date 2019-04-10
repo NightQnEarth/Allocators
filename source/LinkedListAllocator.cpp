@@ -63,3 +63,34 @@ int LinkedListAllocator::getMemoryBlockCapacity()
 {
     return memoryBlockCount * lastMemoryBlock -> getMemoryBlockCapacity();
 }
+
+MemoryBlock *LinkedListAllocator::getMemoryBlock(const int index)
+{
+    int currentBlockNumber = memoryBlockCount;
+
+    while (memoryBlockCount * lastMemoryBlock -> getMemoryBlockCapacity() - 1 < index)
+    {
+        auto newMemoryBlock  = new MemoryBlock();
+        newMemoryBlock -> previous = lastMemoryBlock;
+        lastMemoryBlock = newMemoryBlock;
+
+        memoryBlockCount++;
+    }
+
+    MemoryBlock* memoryBlock = lastMemoryBlock;
+
+    while (memoryBlock -> previous != nullptr &&
+           memoryBlock -> getMemoryBlockCapacity() * (currentBlockNumber - 1) >= index)
+        memoryBlock = memoryBlock -> previous;
+
+    return memoryBlock;
+}
+
+void LinkedListAllocator::deleteLastBlock()
+{
+    memoryBlockCount--;
+
+    MemoryBlock* previous = lastMemoryBlock -> previous;
+    delete(lastMemoryBlock);
+    lastMemoryBlock = previous;
+}

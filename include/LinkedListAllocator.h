@@ -24,36 +24,8 @@ protected:
     int memoryBlockCount = 1;
     MemoryBlock* lastMemoryBlock = new MemoryBlock();
 
-    MemoryBlock* getMemoryBlock(const int index)
-    {
-        int currentBlockNumber = memoryBlockCount;
-
-        while (memoryBlockCount * lastMemoryBlock -> getMemoryBlockCapacity() - 1 < index)
-        {
-            auto newMemoryBlock  = new MemoryBlock();
-            newMemoryBlock -> previous = lastMemoryBlock;
-            lastMemoryBlock = newMemoryBlock;
-
-            memoryBlockCount++;
-        }
-
-        MemoryBlock* memoryBlock = lastMemoryBlock;
-
-        while (memoryBlock -> previous != nullptr &&
-               memoryBlock -> getMemoryBlockCapacity() * (currentBlockNumber - 1) >= index)
-            memoryBlock = memoryBlock -> previous;
-
-        return memoryBlock;
-    }
-
-    void deleteLastBlock()
-    {
-        memoryBlockCount--;
-
-        MemoryBlock* previous = lastMemoryBlock -> previous;
-        delete(lastMemoryBlock);
-        lastMemoryBlock = previous;
-    }
+    MemoryBlock* getMemoryBlock(int index);
+    void deleteLastBlock();
 };
 
 #endif //ALLOCATORS_LINKEDLISTALLOCATOR_H

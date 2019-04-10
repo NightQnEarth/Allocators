@@ -17,3 +17,8 @@ void StackAllocator::removeAll()
 
     LinearAllocator::removeAll();
 }
+
+void StackAllocator::reduceBlock()
+{
+    resizeBlock(false, PULL_SIZE);
+}
