@@ -13,22 +13,14 @@ void testAllocator(Allocator& allocator)
 
     allocator[allocator.getMemoryBlockCapacity()] = 10;
     cout << "allocator[allocator.getMemoryBlockCapacity()] = 10;" << endl;
+    cout << "Length: " << allocator.getLength() << endl;
     cout << "arr.getMemoryBlockSize(): " << allocator.getMemoryBlockSize() << endl;
     cout << "arr.getMemoryBlockCapacity(): " << allocator.getMemoryBlockCapacity() << endl;
-
-    cout << endl;
-    allocator.push(456);
-    cout << "allocator.push(456);" << endl;
-    cout << "arr.getMemoryBlockSize(): " << allocator.getMemoryBlockSize() << endl;
-    cout << "arr.getMemoryBlockCapacity(): " << allocator.getMemoryBlockCapacity() << endl;
-    cout << "arr.getLength(): " << allocator.getLength() << endl;
-    cout << "arr.get(Length - 1): " << allocator.get(allocator.getLength() - 1) << endl;
-    cout << "arr.get(Length - 1): " << allocator.get(allocator.getLength() - 2) << endl;
 
     cout << endl;
     allocator.pop();
     cout << "allocator.pop();" << endl;
-    cout << "arr.get(Length - 1): " << allocator.get(allocator.getLength() - 2) << endl;
+    cout << "Length: " << allocator.getLength() << endl;
     cout << "arr.getMemoryBlockSize(): " << allocator.getMemoryBlockSize() << endl;
     cout << "arr.getMemoryBlockCapacity(): " << allocator.getMemoryBlockCapacity() << endl;
 

@@ -4,7 +4,7 @@ int StackAllocator::pop()
 {
     int poppedItem = LinearAllocator::pop();
 
-    if (capacity - length > getMemoryBlockCapacity())
+    if (length > 0 && capacity - length >= PULL_SIZE / sizeof(int))
         reduceBlock();
 
     return poppedItem;

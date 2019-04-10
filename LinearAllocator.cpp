@@ -11,7 +11,7 @@ int& LinearAllocator::operator[] (const int index)
 {
     if (index < 0) throw out_of_range("Negative index is not valid.");
 
-    while (index > capacity)
+    while (index >= capacity)
         enlargeBlock();
 
     if(index >= length) length = index + 1;
@@ -38,12 +38,7 @@ int LinearAllocator::get(const int index)
 
 void LinearAllocator::set(const int item, const int index)
 {
-    while (index > capacity)
-        enlargeBlock();
-
-    if(index >= length) length = index + 1;
-
-    memoryBlock[index] = item;
+    (*this)[index] = item;
 }
 
 void LinearAllocator::removeAll()
