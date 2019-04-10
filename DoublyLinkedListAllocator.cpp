@@ -1,51 +1,63 @@
+#include <iostream>
 #include "DoublyLinkedListAllocator.h"
 
-DoublyLinkedListAllocator::~DoublyLinkedListAllocator()
-{
-
-}
+using namespace std;
 
 int DoublyLinkedListAllocator::getLength()
 {
-    return 0;
+    return length;
 }
 
-int &DoublyLinkedListAllocator::operator[](int index)
+int& DoublyLinkedListAllocator::operator[](const int index)
 {
-    return index;
+    if (index < 0) throw out_of_range("Negative index is not valid.");
+    if(index >= length) length = index + 1;
+
+    MemoryBlock* memoryBlockWithSpecifiedIndex = getMemoryBlock(index);
+    const int modOfCapacity = index % memoryBlockWithSpecifiedIndex -> getMemoryBlockCapacity();
+
+    return memoryBlockWithSpecifiedIndex -> memoryBlock[modOfCapacity];
 }
 
-void DoublyLinkedListAllocator::push(int item)
+void DoublyLinkedListAllocator::push(const int item)
 {
-
+    set(item, length);
 }
 
 int DoublyLinkedListAllocator::pop()
 {
-    return 0;
+    if (length-- == 0) throw out_of_range("Array instance is empty.");
+
+    if (memoryBlockCount > 1 && getMemoryBlockCapacity() - length >= PULL_SIZE / sizeof(int))
+        deleteLastBlock();
+
+    return (*this)[length];
 }
 
-int DoublyLinkedListAllocator::get(int index)
+int DoublyLinkedListAllocator::get(const int index)
 {
-    return 0;
+    return (*this)[index];
 }
 
-void DoublyLinkedListAllocator::set(int item, int index)
+void DoublyLinkedListAllocator::set(const int item, const int index)
 {
-
+    (*this)[index] = item;
 }
 
 void DoublyLinkedListAllocator::removeAll()
 {
+    while (memoryBlockCount > 1 && getMemoryBlockCapacity() - length >= PULL_SIZE / sizeof(int))
+        deleteLastBlock();
 
+    length = 0;
 }
 
 int DoublyLinkedListAllocator::getMemoryBlockSize()
 {
-    return 0;
+    return getMemoryBlockCapacity() * sizeof(int);
 }
 
 int DoublyLinkedListAllocator::getMemoryBlockCapacity()
 {
-    return 0;
+    return memoryBlockCount * lastMemoryBlock -> getMemoryBlockCapacity();
 }

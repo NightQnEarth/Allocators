@@ -7,12 +7,14 @@
 class MemoryBlock : MemoryBlocksContainer
 {
 public:
-    int* memoryBlock = (int*)malloc(PULL_SIZE);
+    int* memoryBlock = (int*)malloc(getMemoryBlockSize());
     MemoryBlock* previous;
     MemoryBlock* next;
 
-    MemoryBlock(MemoryBlock* previous, MemoryBlock* next);
     ~MemoryBlock() override;
+
+    int getMemoryBlockSize() override;
+    int getMemoryBlockCapacity() override;
 };
 
 #endif //ALLOCATORS_MEMORYBLOCK_H
