@@ -1,4 +1,4 @@
-#include "../include/StackAllocator.h"
+#include "StackAllocator.h"
 
 int StackAllocator::pop()
 {

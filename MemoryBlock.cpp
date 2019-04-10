@@ -1,4 +1,4 @@
-#include "../include/MemoryBlock.h"
+#include "MemoryBlock.h"
 
 MemoryBlock::~MemoryBlock()
 {
