@@ -1,27 +1,17 @@
 #ifndef ALLOCATORS_STACKALLOCATOR_H
 #define ALLOCATORS_STACKALLOCATOR_H
 
-#include "Array.h"
+#include "LinearAllocator.h"
 #include <iostream>
 
-class StackAllocator : public Array
+class StackAllocator : public LinearAllocator
 {
 public:
-    StackAllocator();
-    ~StackAllocator() override;
-
-    int& operator[] (int index)  override;
-    void push(int item)  override;
-    int pop()  override;
-    int get(int index)  override;
-    void set(int item, int index)  override;
+    int pop() override;
     void removeAll() override;
 
-    int getLength() override;
-
-private:
-    int length = 0;
+protected:
+    void reduceBlock() { resizeBlock(false, START_BLOCK_SIZE); }
 };
-
 
 #endif //ALLOCATORS_STACKALLOCATOR_H

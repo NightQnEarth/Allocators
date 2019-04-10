@@ -1,46 +1,19 @@
 #include "StackAllocator.h"
 
-StackAllocator::StackAllocator()
-{
-
-}
-
-StackAllocator::~StackAllocator()
-{
-
-}
-
-int& StackAllocator::operator[](int index)
-{
-    return index;
-}
-
-void StackAllocator::push(int item)
-{
-
-}
-
 int StackAllocator::pop()
 {
-    return 0;
-}
+    int poppedItem = LinearAllocator::pop();
 
-int StackAllocator::get(int index)
-{
-    return 0;
-}
+    if (capacity - length > getMemoryBlockCapacity())
+        reduceBlock();
 
-void StackAllocator::set(int item, int index)
-{
-
+    return poppedItem;
 }
 
 void StackAllocator::removeAll()
 {
+    if (memoryBlockSize > START_BLOCK_SIZE)
+        resizeBlock(false, memoryBlockSize - START_BLOCK_SIZE, false);
 
-}
-
-int StackAllocator::getLength()
-{
-    return length;
+    LinearAllocator::removeAll();
 }

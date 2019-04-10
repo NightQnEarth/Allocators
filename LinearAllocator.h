@@ -9,7 +9,6 @@ class LinearAllocator : public Array
 public:
     const int START_BLOCK_SIZE = 1024 * 1024;
 
-    LinearAllocator();
     ~LinearAllocator() override;
 
     int& operator[] (int index) override;
@@ -20,18 +19,18 @@ public:
     void removeAll() override;
 
     int getLength() override;
+    int getMemoryBlockSize() override;
+    int getMemoryBlockCapacity() override;
 
-private:
+protected:
     int* memoryBlock = (int*)malloc(START_BLOCK_SIZE);
     int memoryBlockSize = START_BLOCK_SIZE;
     int length = 0;
-    int capacity = getMemoryBlockCapacity(memoryBlockSize);
+    int capacity = getMemoryBlockCapacity();
 
-    void enlargeArray() { resizeArray(true, START_BLOCK_SIZE); }
+    void enlargeBlock() { resizeBlock(true, START_BLOCK_SIZE); }
 
-    void reduceArray() { resizeArray(false, START_BLOCK_SIZE); }
-
-    void resizeArray(const bool enlarge, const int addingBytesCount, const bool saveValues = true)
+    void resizeBlock(const bool enlarge, const int addingBytesCount, const bool saveValues = true)
     {
         memoryBlockSize += enlarge ? addingBytesCount : -addingBytesCount;
         int* newMemoryBlock = (int*)malloc(memoryBlockSize);
@@ -43,20 +42,7 @@ private:
         free(memoryBlock);
 
         memoryBlock = newMemoryBlock;
-        capacity = getMemoryBlockCapacity(memoryBlockSize);
-    }
-
-    void clearMemoryBlock()
-    {
-        for (int i = 0; i < capacity; ++i)
-            memoryBlock[i] = 0;
-
-        length = 0;
-    }
-
-    static int getMemoryBlockCapacity(int blockSize)
-    {
-        return blockSize / sizeof(int);
+        capacity = getMemoryBlockCapacity();
     }
 };
 
