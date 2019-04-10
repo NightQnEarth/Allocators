@@ -1,16 +1,16 @@
-#ifndef ALLOCATOR_LINEALLOCATOR_H
-#define ALLOCATOR_LINEALLOCATOR_H
+#ifndef ALLOCATOR_LINEARALLOCATOR_H
+#define ALLOCATOR_LINEARALLOCATOR_H
 
 #include "Array.h"
 #include <iostream>
 
-class LineAllocator : public Array
+class LinearAllocator : public Array
 {
 public:
     const int START_BLOCK_SIZE = 1024 * 1024;
 
-    LineAllocator();
-    ~LineAllocator() override;
+    LinearAllocator();
+    ~LinearAllocator() override;
 
     int& operator[] (int index) override;
     void push(int item) override;
@@ -57,4 +57,4 @@ private:
     }
 };
 
-#endif //ALLOCATOR_LINEALLOCATOR_H
+#endif //ALLOCATOR_LINEARALLOCATOR_H

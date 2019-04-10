@@ -1,18 +1,18 @@
-#include "LineAllocator.h"
+#include "LinearAllocator.h"
 
 using namespace std;
 
-LineAllocator::LineAllocator()
+LinearAllocator::LinearAllocator()
 {
     clearMemoryBlock();
 }
 
-LineAllocator::~LineAllocator()
+LinearAllocator::~LinearAllocator()
 {
     free(memoryBlock);
 }
 
-int& LineAllocator::operator[] (const int index)
+int& LinearAllocator::operator[] (const int index)
 {
     if (index < 0) throw out_of_range("Negative index is not valid.");
 
@@ -24,12 +24,12 @@ int& LineAllocator::operator[] (const int index)
     return memoryBlock[index];
 }
 
-void LineAllocator::push(const int item)
+void LinearAllocator::push(const int item)
 {
     set(item, Length);
 }
 
-int LineAllocator::pop()
+int LinearAllocator::pop()
 {
     if (Length-- == 0) throw out_of_range("Array instance is empty.");
 
@@ -39,12 +39,12 @@ int LineAllocator::pop()
     return memoryBlock[Length];
 }
 
-int LineAllocator::get(const int index)
+int LinearAllocator::get(const int index)
 {
     return (*this)[index];
 }
 
-void LineAllocator::set(const int item, const int index)
+void LinearAllocator::set(const int item, const int index)
 {
     while (index > capacity)
         enlargeArray();
@@ -54,7 +54,7 @@ void LineAllocator::set(const int item, const int index)
     memoryBlock[index] = item;
 }
 
-void LineAllocator::removeAll()
+void LinearAllocator::removeAll()
 {
     if (memoryBlockSize > START_BLOCK_SIZE)
         resizeArray(false, memoryBlockSize - START_BLOCK_SIZE, false);

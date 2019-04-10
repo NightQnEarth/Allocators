@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Array.h"
-#include "LineAllocator.h"
+#include "LinearAllocator.h"
 
 using namespace std;
 
@@ -29,7 +29,7 @@ int main()
 {
     try
     {
-        LineAllocator lineAllocator;
+        LinearAllocator lineAllocator;
         Array* allocators[] = {&lineAllocator};
 
         for (auto & allocator : allocators)
