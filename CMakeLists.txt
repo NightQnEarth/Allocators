@@ -3,4 +3,4 @@ project(Allocators)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Allocators main.cpp Array.h LinearAllocator.cpp LinearAllocator.h StackAllocator.cpp StackAllocator.h DoublyLinkedListAllocator.cpp DoublyLinkedListAllocator.h MemoryBlocksContainer.h Allocator.h)
+add_executable(Allocators main.cpp Array.h LinearAllocator.cpp LinearAllocator.h StackAllocator.cpp StackAllocator.h DoublyLinkedListAllocator.cpp DoublyLinkedListAllocator.h MemoryBlocksContainer.h Allocator.h MemoryBlock.cpp MemoryBlock.h)
