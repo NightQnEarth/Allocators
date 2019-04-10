@@ -13,7 +13,7 @@ void testAllocator(Array& allocator)
     allocator.set(789, 3);
 
     for (int i = 0; i < allocator.getLength(); ++i)
-        cout << allocator[i] << '|';
+        cout << allocator[i] << ' ';
 
     cout << endl;
 
@@ -22,7 +22,7 @@ void testAllocator(Array& allocator)
     cout << "Length: " << allocator.getLength() << endl;
 
     for (int i = 0; i < allocator.getLength(); ++i)
-        cout << allocator[i] << '|';
+        cout << allocator[i] << ' ';
 }
 
 int main()
@@ -33,7 +33,10 @@ int main()
         Array* allocators[] = {&lineAllocator};
 
         for (auto & allocator : allocators)
+        {
             testAllocator(*allocator);
+            cout << "--------------------------------------" << endl;
+        }
     }
     catch (const exception& exception)
     {
