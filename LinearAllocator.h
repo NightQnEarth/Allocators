@@ -19,9 +19,12 @@ public:
     void set(int item, int index) override;
     void removeAll() override;
 
+    int getLength() override;
+
 private:
     int* memoryBlock = (int*)malloc(START_BLOCK_SIZE);
     int memoryBlockSize = START_BLOCK_SIZE;
+    int length = 0;
     int capacity = getMemoryBlockCapacity(memoryBlockSize);
 
     void enlargeArray() { resizeArray(true, START_BLOCK_SIZE); }
@@ -34,7 +37,7 @@ private:
         int* newMemoryBlock = (int*)malloc(memoryBlockSize);
 
         if (saveValues)
-            for (int i = 0; i < Length; ++i)
+            for (int i = 0; i < length; ++i)
                 newMemoryBlock[i] = memoryBlock[i];
 
         free(memoryBlock);
@@ -48,7 +51,7 @@ private:
         for (int i = 0; i < capacity; ++i)
             memoryBlock[i] = 0;
 
-        Length = 0;
+        length = 0;
     }
 
     static int getMemoryBlockCapacity(int blockSize)

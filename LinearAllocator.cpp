@@ -19,24 +19,24 @@ int& LinearAllocator::operator[] (const int index)
     while (index > capacity)
         enlargeArray();
 
-    if(index >= Length) Length = index + 1;
+    if(index >= length) length = index + 1;
 
     return memoryBlock[index];
 }
 
 void LinearAllocator::push(const int item)
 {
-    set(item, Length);
+    set(item, length);
 }
 
 int LinearAllocator::pop()
 {
-    if (Length-- == 0) throw out_of_range("Array instance is empty.");
+    if (length-- == 0) throw out_of_range("Array instance is empty.");
 
-    if (capacity - Length > getMemoryBlockCapacity(START_BLOCK_SIZE))
+    if (capacity - length > getMemoryBlockCapacity(START_BLOCK_SIZE))
         reduceArray();
 
-    return memoryBlock[Length];
+    return memoryBlock[length];
 }
 
 int LinearAllocator::get(const int index)
@@ -49,7 +49,7 @@ void LinearAllocator::set(const int item, const int index)
     while (index > capacity)
         enlargeArray();
 
-    if(index >= Length) Length = index + 1;
+    if(index >= length) length = index + 1;
 
     memoryBlock[index] = item;
 }
@@ -60,4 +60,9 @@ void LinearAllocator::removeAll()
         resizeArray(false, memoryBlockSize - START_BLOCK_SIZE, false);
 
     clearMemoryBlock();
+}
+
+int LinearAllocator::getLength()
+{
+    return length;
 }

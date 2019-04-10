@@ -8,20 +8,20 @@ void testAllocator(Array& allocator)
 {
     allocator[300000] = 10;
     allocator.push(456);
-    cout << "arr.get(arr.Length - 1): " << allocator.get(allocator.Length - 1) << endl;
+    cout << "arr.get(Length - 1): " << allocator.get(allocator.getLength() - 1) << endl;
     allocator.pop();
     allocator.set(789, 3);
 
-    for (int i = 0; i < allocator.Length; ++i)
+    for (int i = 0; i < allocator.getLength(); ++i)
         cout << allocator[i] << '|';
 
     cout << endl;
 
     allocator.removeAll();
 
-    cout << "arr.Length: " << allocator.Length << endl;
+    cout << "Length: " << allocator.getLength() << endl;
 
-    for (int i = 0; i < allocator.Length; ++i)
+    for (int i = 0; i < allocator.getLength(); ++i)
         cout << allocator[i] << '|';
 }
 

@@ -4,8 +4,6 @@
 class Array
 {
 public:
-    int Length = 0;
-
     virtual ~Array() = default;
 
     virtual int& operator[] (int index) = 0;
@@ -14,6 +12,8 @@ public:
     virtual int get(int index) = 0;
     virtual void set(int item, int index) = 0;
     virtual void removeAll() = 0;
+
+    virtual int getLength() = 0;
 };
 
 #endif // ALLOCATOR_ARRAY_H
