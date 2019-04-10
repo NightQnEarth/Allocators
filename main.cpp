@@ -46,25 +46,17 @@ void testAllocator(Allocator& allocator)
 
 int main()
 {
-    try
+    LinearAllocator linearAllocator;
+    StackAllocator stackAllocator;
+    LinkedListAllocator linkedListAllocator;
+
+    Allocator* allocators[] = {&linearAllocator, &stackAllocator, &linkedListAllocator};
+
+    for (auto & allocator : allocators)
     {
-        LinearAllocator linearAllocator;
-        StackAllocator stackAllocator;
-        LinkedListAllocator linkedListAllocator;
+        testAllocator(*allocator);
 
-        Allocator* allocators[] = {&linearAllocator, &stackAllocator, &linkedListAllocator};
-
-        for (auto & allocator : allocators)
-        {
-            testAllocator(*allocator);
-
-            cout << endl << "--------------------------------------" << endl;
-        }
-    }
-    catch (const exception& exception)
-    {
-        cout << exception.what();
-        return 1;
+        cout << endl << "--------------------------------------" << endl;
     }
 
     return 0;
