@@ -7,10 +7,9 @@
 class LinearAllocator : public Allocator
 {
 public:
-    const int START_BLOCK_SIZE = 1024 * 1024;
-
     ~LinearAllocator() override;
 
+    int getLength() override;
     int& operator[] (int index) override;
     void push(int item) override;
     int pop() override;
@@ -18,17 +17,16 @@ public:
     void set(int item, int index) override;
     void removeAll() override;
 
-    int getLength() override;
     int getMemoryBlockSize() override;
     int getMemoryBlockCapacity() override;
 
 protected:
-    int* memoryBlock = (int*)malloc(START_BLOCK_SIZE);
-    int memoryBlockSize = START_BLOCK_SIZE;
+    int* memoryBlock = (int*)malloc(PULL_SIZE);
+    int memoryBlockSize = PULL_SIZE;
     int length = 0;
     int capacity = getMemoryBlockCapacity();
 
-    void enlargeBlock() { resizeBlock(true, START_BLOCK_SIZE); }
+    void enlargeBlock() { resizeBlock(true, PULL_SIZE); }
 
     void resizeBlock(const bool enlarge, const int addingBytesCount, const bool saveValues = true)
     {

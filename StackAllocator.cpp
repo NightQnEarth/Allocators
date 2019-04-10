@@ -12,8 +12,8 @@ int StackAllocator::pop()
 
 void StackAllocator::removeAll()
 {
-    if (memoryBlockSize > START_BLOCK_SIZE)
-        resizeBlock(false, memoryBlockSize - START_BLOCK_SIZE, false);
+    if (memoryBlockSize > PULL_SIZE)
+        resizeBlock(false, memoryBlockSize - PULL_SIZE, false);
 
     LinearAllocator::removeAll();
 }

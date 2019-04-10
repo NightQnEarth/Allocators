@@ -11,7 +11,7 @@ public:
     void removeAll() override;
 
 protected:
-    void reduceBlock() { resizeBlock(false, START_BLOCK_SIZE); }
+    void reduceBlock() { resizeBlock(false, PULL_SIZE); }
 };
 
 #endif //ALLOCATORS_STACKALLOCATOR_H

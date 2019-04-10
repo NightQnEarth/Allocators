@@ -4,6 +4,8 @@
 class MemoryBlocksContainer
 {
 public:
+    const int PULL_SIZE = 1024 * 1024;
+
     virtual ~MemoryBlocksContainer() = default;
 
     virtual int getMemoryBlockSize() = 0;
