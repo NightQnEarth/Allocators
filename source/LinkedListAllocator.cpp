@@ -1,4 +1,3 @@
-#include <iostream>
 #include "../include/LinkedListAllocator.h"
 
 using namespace std;
