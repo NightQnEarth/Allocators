@@ -1,12 +1,12 @@
-#ifndef ALLOCATORS_DOUBLELINKEDLISTALLOCATOR_H
-#define ALLOCATORS_DOUBLELINKEDLISTALLOCATOR_H
+#ifndef ALLOCATORS_DOUBLYLINKEDLISTALLOCATOR_H
+#define ALLOCATORS_DOUBLYLINKEDLISTALLOCATOR_H
 
 #include "Allocator.h"
 
-class DoubleLinkedListAllocator : public Allocator
+class DoublyLinkedListAllocator : public Allocator
 {
 public:
-    ~DoubleLinkedListAllocator() override;
+    ~DoublyLinkedListAllocator() override;
 
     int getLength() override;
     int& operator[] (int index) override;
@@ -23,4 +23,4 @@ protected:
 
 };
 
-#endif //ALLOCATORS_DOUBLELINKEDLISTALLOCATOR_H
+#endif //ALLOCATORS_DOUBLYLINKEDLISTALLOCATOR_H
