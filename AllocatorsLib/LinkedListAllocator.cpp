@@ -1,6 +1,5 @@
+#include <iostream>
 #include "LinkedListAllocator.h"
-
-using namespace std;
 
 int LinkedListAllocator::getLength()
 {
@@ -9,7 +8,7 @@ int LinkedListAllocator::getLength()
 
 int& LinkedListAllocator::operator[](const int index)
 {
-    if (index < 0) throw out_of_range("Negative index is not valid.");
+    if (index < 0) throw std::out_of_range("Negative index is not valid.");
     if(index >= length) length = index + 1;
 
     MemoryBlock* memoryBlockWithSpecifiedIndex = getMemoryBlock(index);
@@ -25,7 +24,7 @@ void LinkedListAllocator::push(const int item)
 
 int LinkedListAllocator::pop()
 {
-    if (length-- == 0) throw out_of_range("Array instance is empty.");
+    if (length-- == 0) throw std::out_of_range("Array instance is empty.");
 
     int poppedItem = (*this)[length];
     length--;
@@ -46,7 +45,7 @@ void LinkedListAllocator::set(const int item, const int index)
     (*this)[index] = item;
 }
 
-void LinkedListAllocator::removeAll()
+void LinkedListAllocator::removeAll() // TODO: Maybe delete[] and recreate start block.?
 {
     while (memoryBlockCount > 1 && getMemoryBlockCapacity() - length >= PULL_SIZE / sizeof(int))
         deleteLastBlock();

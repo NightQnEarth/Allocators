@@ -1,15 +1,15 @@
 #ifndef ALLOCATORS_MEMORYBLOCK_H
 #define ALLOCATORS_MEMORYBLOCK_H
 
-#include <iostream>
 #include "MemoryBlocksContainer.h"
 
 class MemoryBlock : MemoryBlocksContainer
 {
 public:
-    int* memoryBlock = (int*)malloc(PULL_SIZE);
+    int* memoryBlock;
     MemoryBlock* previous;
 
+    MemoryBlock();
     ~MemoryBlock() override;
 
     int getMemoryBlockSize() override;

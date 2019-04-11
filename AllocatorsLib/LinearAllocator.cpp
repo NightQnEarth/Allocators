@@ -1,6 +1,15 @@
+#include <iostream>
 #include "LinearAllocator.h"
 
 using namespace std;
+
+LinearAllocator::LinearAllocator()
+{
+    memoryBlock = (int*)malloc(PULL_SIZE);
+    memoryBlockSize = PULL_SIZE;
+    length = 0;
+    capacity = getMemoryBlockCapacity();
+}
 
 LinearAllocator::~LinearAllocator()
 {

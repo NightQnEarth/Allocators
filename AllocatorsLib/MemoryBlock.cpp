@@ -1,4 +1,11 @@
+#include <iostream>
 #include "MemoryBlock.h"
+
+MemoryBlock::MemoryBlock()
+{
+    memoryBlock = (int*)malloc(PULL_SIZE);
+    previous = nullptr;
+}
 
 MemoryBlock::~MemoryBlock()
 {

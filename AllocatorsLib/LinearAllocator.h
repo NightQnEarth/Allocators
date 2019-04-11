@@ -1,12 +1,12 @@
 #ifndef ALLOCATOR_LINEARALLOCATOR_H
 #define ALLOCATOR_LINEARALLOCATOR_H
 
-#include <iostream>
 #include "Allocator.h"
 
 class LinearAllocator : public Allocator
 {
 public:
+    LinearAllocator();
     ~LinearAllocator() override;
 
     int getLength() override;
@@ -21,10 +21,10 @@ public:
     int getMemoryBlockCapacity() override;
 
 protected:
-    int* memoryBlock = (int*)malloc(PULL_SIZE);
-    int memoryBlockSize = PULL_SIZE;
-    int length = 0;
-    int capacity = getMemoryBlockCapacity();
+    int* memoryBlock;
+    int memoryBlockSize;
+    int length;
+    int capacity;
 
     void enlargeBlock();
     void resizeBlock(bool enlarge, int addingBytesCount, bool saveValues = true);

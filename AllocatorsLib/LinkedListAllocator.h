@@ -1,7 +1,6 @@
 #ifndef ALLOCATORS_LINKEDLISTALLOCATOR_H
 #define ALLOCATORS_LINKEDLISTALLOCATOR_H
 
-#include <iostream>
 #include "Allocator.h"
 #include "MemoryBlock.h"
 
@@ -22,7 +21,7 @@ public:
 protected:
     int length = 0;
     int memoryBlockCount = 1;
-    MemoryBlock* lastMemoryBlock = new MemoryBlock();
+    MemoryBlock* lastMemoryBlock = new MemoryBlock(); // TODO: Destructor?
 
     MemoryBlock* getMemoryBlock(int index);
     void deleteLastBlock();

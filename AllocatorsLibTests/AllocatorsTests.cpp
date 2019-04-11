@@ -1,11 +1,7 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock.h>
-#include "../AllocatorsLib/Allocator.h"
-#include "../AllocatorsLib/LinearAllocator.h"
 #include "../AllocatorsLib/StackAllocator.h"
 #include "../AllocatorsLib/LinkedListAllocator.h"
-
-using testing::Eq;
 
 namespace
 {
@@ -13,10 +9,6 @@ namespace
     {
     public:
         LinearAllocator linearAllocator;
-        AllocatorDeclaration()
-        {
-            linearAllocator;
-        }
     };
 }
 
