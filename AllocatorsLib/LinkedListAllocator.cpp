@@ -79,7 +79,7 @@ MemoryBlock *LinkedListAllocator::getMemoryBlock(const int index)
     MemoryBlock* memoryBlock = lastMemoryBlock;
 
     while (memoryBlock -> previous != nullptr &&
-           memoryBlock -> getMemoryBlockCapacity() * (currentBlockNumber - 1) >= index)
+           memoryBlock -> getMemoryBlockCapacity() * (currentBlockNumber - 1) > index)
         memoryBlock = memoryBlock -> previous;
 
     return memoryBlock;
