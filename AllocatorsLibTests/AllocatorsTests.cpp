@@ -8,7 +8,7 @@
 
 namespace
 {
-    class AllocatorsDeclaration : public testing::Test
+    class Allocators : public testing::Test
     {
     public:
         LinearAllocator linearAllocator;
@@ -17,7 +17,7 @@ namespace
     };
 }
 
-TEST_F(AllocatorsDeclaration, throw_on_negative_index)
+TEST_F(Allocators, throw_on_negative_index)
 {
     Allocator* allocators[] = {&linearAllocator, &stackAllocator, &linkedListAllocator};
 
@@ -25,7 +25,7 @@ TEST_F(AllocatorsDeclaration, throw_on_negative_index)
         ASSERT_THROW(allocator -> get(-1), std::out_of_range);
 }
 
-TEST_F(AllocatorsDeclaration, correct_push_pop_item)
+TEST_F(Allocators, correct_push_pop_item)
 {
     Allocator* allocators[] = {&linearAllocator, &stackAllocator, &linkedListAllocator};
 
@@ -36,7 +36,7 @@ TEST_F(AllocatorsDeclaration, correct_push_pop_item)
     }
 }
 
-TEST_F(AllocatorsDeclaration, not_throw_when_index_more_than_length)
+TEST_F(Allocators, not_throw_when_index_more_than_length)
 {
     Allocator* allocators[] = {&linearAllocator, &stackAllocator, &linkedListAllocator};
 
@@ -48,7 +48,7 @@ TEST_F(AllocatorsDeclaration, not_throw_when_index_more_than_length)
     }
 }
 
-TEST_F(AllocatorsDeclaration, throw_on_pop_when_allocator_is_empty)
+TEST_F(Allocators, throw_on_pop_when_allocator_is_empty)
 {
     Allocator* allocators[] = {&linearAllocator, &stackAllocator, &linkedListAllocator};
 
@@ -59,7 +59,7 @@ TEST_F(AllocatorsDeclaration, throw_on_pop_when_allocator_is_empty)
     }
 }
 
-TEST_F(AllocatorsDeclaration, start_size_equal_pullsize)
+TEST_F(Allocators, start_size_equal_pullsize)
 {
     Allocator* allocators[] = {&linearAllocator, &stackAllocator, &linkedListAllocator};
 
@@ -67,7 +67,7 @@ TEST_F(AllocatorsDeclaration, start_size_equal_pullsize)
         ASSERT_EQ(allocator->getMemoryBlockSize(), allocator->PULL_SIZE);
 }
 
-TEST_F(AllocatorsDeclaration, correct_start_capacity)
+TEST_F(Allocators, correct_start_capacity)
 {
     Allocator* allocators[] = {&linearAllocator, &stackAllocator, &linkedListAllocator};
 
@@ -75,7 +75,7 @@ TEST_F(AllocatorsDeclaration, correct_start_capacity)
         ASSERT_EQ(allocator->getMemoryBlockCapacity(), allocator->PULL_SIZE / sizeof(int));
 }
 
-TEST_F(AllocatorsDeclaration, start_length_is_zero)
+TEST_F(Allocators, start_length_is_zero)
 {
     Allocator* allocators[] = {&linearAllocator, &stackAllocator, &linkedListAllocator};
 
@@ -83,7 +83,7 @@ TEST_F(AllocatorsDeclaration, start_length_is_zero)
         ASSERT_EQ(allocator->getLength(), 0);
 }
 
-TEST_F(AllocatorsDeclaration, correct_enlarge_memory_block)
+TEST_F(Allocators, correct_enlarge_memory_block)
 {
     Allocator* allocators[] = {&linearAllocator, &stackAllocator, &linkedListAllocator};
 
@@ -100,7 +100,7 @@ TEST_F(AllocatorsDeclaration, correct_enlarge_memory_block)
     }
 }
 
-TEST_F(AllocatorsDeclaration, correct_reduce_memory_block) // For StackAllocator and LinkedListAllocator
+TEST_F(Allocators, correct_reduce_memory_block) // For StackAllocator and LinkedListAllocator
 {
     Allocator* allocators[] = {&stackAllocator, &linkedListAllocator};
 
@@ -116,7 +116,7 @@ TEST_F(AllocatorsDeclaration, correct_reduce_memory_block) // For StackAllocator
     }
 }
 
-TEST_F(AllocatorsDeclaration, not_reduce_memory_block_for_linear_allocator)
+TEST_F(Allocators, not_reduce_memory_block_for_linear_allocator)
 {
     Allocator* allocators[] = {&linearAllocator};
 
@@ -132,7 +132,7 @@ TEST_F(AllocatorsDeclaration, not_reduce_memory_block_for_linear_allocator)
     }
 }
 
-TEST_F(AllocatorsDeclaration, length_not_reduce)
+TEST_F(Allocators, length_not_reduce)
 {
     Allocator* allocators[] = {&linearAllocator, &stackAllocator, &linkedListAllocator};
 

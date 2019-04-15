@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include <gmock/gmock.h>
-#include "RunTests.h"
+#include "TestsRunner.h"
 
 int TestsRunner::run_tests(int argc, char* argv[])
 {
