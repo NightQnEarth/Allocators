@@ -1,6 +1,19 @@
-cmake_minimum_required(VERSION 3.13)
 project(AllocatorsLib)
 
-set(CMAKE_CXX_STANDARD 17)
+set(HEADER_FILES
+        Array.h
+        LinearAllocator.h
+        StackAllocator.h
+        LinkedListAllocator.h
+        MemoryBlocksContainer.h
+        Allocator.h
+        MemoryBlock.h)
 
-add_library(AllocatorsLib Array.h LinearAllocator.cpp LinearAllocator.h StackAllocator.cpp StackAllocator.h LinkedListAllocator.cpp LinkedListAllocator.h MemoryBlocksContainer.h Allocator.h MemoryBlock.cpp MemoryBlock.h)
+set(SOURCE_FILES
+        LinearAllocator.cpp
+        StackAllocator.cpp
+        LinkedListAllocator.cpp
+        MemoryBlock.cpp
+        )
+
+add_library(AllocatorsLib STATIC ${SOURCE_FILES} ${HEADER_FILES})
