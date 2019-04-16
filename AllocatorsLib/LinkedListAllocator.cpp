@@ -1,6 +1,11 @@
 #include <iostream>
 #include "LinkedListAllocator.h"
 
+LinkedListAllocator::~LinkedListAllocator()
+{
+    delete(lastMemoryBlock);
+}
+
 int LinkedListAllocator::getLength()
 {
     return length;
@@ -45,7 +50,7 @@ void LinkedListAllocator::set(const int item, const int index)
     (*this)[index] = item;
 }
 
-void LinkedListAllocator::removeAll() // TODO: Maybe delete[] and recreate start block.?
+void LinkedListAllocator::removeAll()
 {
     while (memoryBlockCount > 1 && getMemoryBlockCapacity() - length >= PULL_SIZE / sizeof(int))
         deleteLastBlock();

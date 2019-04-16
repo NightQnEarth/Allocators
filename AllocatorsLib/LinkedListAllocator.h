@@ -7,6 +7,8 @@
 class LinkedListAllocator : public Allocator
 {
 public:
+    ~LinkedListAllocator() override;
+
     int getLength() override;
     int& operator[] (int index) override;
     void push(int item) override;
@@ -21,7 +23,7 @@ public:
 protected:
     int length = 0;
     int memoryBlockCount = 1;
-    MemoryBlock* lastMemoryBlock = new MemoryBlock(); // TODO: Destructor?
+    MemoryBlock* lastMemoryBlock = new MemoryBlock();
 
     MemoryBlock* getMemoryBlock(int index);
     void deleteLastBlock();
