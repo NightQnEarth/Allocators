@@ -89,7 +89,7 @@ TEST_F(Allocators, correct_enlarge_memory_block)
 
     for (auto & allocator : allocators)
     {
-        int startCapacity = allocator->getMemoryBlockCapacity();
+        size_t startCapacity = allocator->getMemoryBlockCapacity();
 
         ASSERT_NO_THROW((*allocator)[startCapacity] = 100);
         ASSERT_EQ(allocator->get(startCapacity), 100);
@@ -106,7 +106,7 @@ TEST_F(Allocators, correct_reduce_memory_block) // For StackAllocator and Linked
 
     for (auto & allocator : allocators)
     {
-        int startCapacity = allocator->getMemoryBlockCapacity();
+        size_t startCapacity = allocator->getMemoryBlockCapacity();
         allocator->set(100, startCapacity);
         allocator->pop();
 
@@ -122,7 +122,7 @@ TEST_F(Allocators, not_reduce_memory_block_for_linear_allocator)
 
     for (auto & allocator : allocators)
     {
-        int startCapacity = allocator->getMemoryBlockCapacity();
+        size_t startCapacity = allocator->getMemoryBlockCapacity();
         allocator->set(100, startCapacity);
         allocator->pop();
 
@@ -138,7 +138,7 @@ TEST_F(Allocators, length_not_reduce)
 
     for (auto & allocator : allocators)
     {
-        int startCapacity = allocator->getMemoryBlockCapacity();
+        size_t startCapacity = allocator->getMemoryBlockCapacity();
         ASSERT_EQ(allocator->getLength(), 0);
 
         allocator->set(100, startCapacity);

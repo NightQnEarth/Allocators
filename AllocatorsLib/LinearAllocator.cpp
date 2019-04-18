@@ -55,17 +55,17 @@ void LinearAllocator::removeAll()
     length = 0;
 }
 
-int LinearAllocator::getLength()
+size_t LinearAllocator::getLength()
 {
     return length;
 }
 
-int LinearAllocator::getMemoryBlockSize()
+size_t LinearAllocator::getMemoryBlockSize()
 {
     return memoryBlockSize;
 }
 
-int LinearAllocator::getMemoryBlockCapacity()
+size_t LinearAllocator::getMemoryBlockCapacity()
 {
     return memoryBlockSize / sizeof(int);
 }
@@ -75,7 +75,7 @@ void LinearAllocator::enlargeBlock()
     resizeBlock(true, PULL_SIZE);
 }
 
-void LinearAllocator::resizeBlock(const bool enlarge, const int addingBytesCount, const bool saveValues)
+void LinearAllocator::resizeBlock(const bool enlarge, const size_t addingBytesCount, const bool saveValues)
 {
     memoryBlockSize += enlarge ? addingBytesCount : -addingBytesCount;
     int* newMemoryBlock = (int*)malloc(memoryBlockSize);

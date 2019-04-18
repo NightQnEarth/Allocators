@@ -6,7 +6,7 @@ LinkedListAllocator::~LinkedListAllocator()
     delete(lastMemoryBlock);
 }
 
-int LinkedListAllocator::getLength()
+size_t LinkedListAllocator::getLength()
 {
     return length;
 }
@@ -17,7 +17,7 @@ int& LinkedListAllocator::operator[](const int index)
     if(index >= length) length = index + 1;
 
     MemoryBlock* memoryBlockWithSpecifiedIndex = getMemoryBlock(index);
-    const int modOfCapacity = index % memoryBlockWithSpecifiedIndex -> getMemoryBlockCapacity();
+    const size_t modOfCapacity = index % memoryBlockWithSpecifiedIndex -> getMemoryBlockCapacity();
 
     return memoryBlockWithSpecifiedIndex -> memoryBlock[modOfCapacity];
 }
@@ -58,19 +58,19 @@ void LinkedListAllocator::removeAll()
     length = 0;
 }
 
-int LinkedListAllocator::getMemoryBlockSize()
+size_t LinkedListAllocator::getMemoryBlockSize()
 {
     return getMemoryBlockCapacity() * sizeof(int);
 }
 
-int LinkedListAllocator::getMemoryBlockCapacity()
+size_t LinkedListAllocator::getMemoryBlockCapacity()
 {
     return memoryBlockCount * lastMemoryBlock -> getMemoryBlockCapacity();
 }
 
-MemoryBlock *LinkedListAllocator::getMemoryBlock(const int index)
+MemoryBlock* LinkedListAllocator::getMemoryBlock(const int index)
 {
-    int currentBlockNumber = memoryBlockCount;
+    size_t currentBlockNumber = memoryBlockCount;
 
     while (memoryBlockCount * lastMemoryBlock -> getMemoryBlockCapacity() - 1 < index)
     {

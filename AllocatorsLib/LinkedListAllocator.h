@@ -9,7 +9,7 @@ class LinkedListAllocator : public Allocator
 public:
     ~LinkedListAllocator() override;
 
-    int getLength() override;
+    size_t getLength() override;
     int& operator[] (int index) override;
     void push(int item) override;
     int pop() override;
@@ -17,12 +17,12 @@ public:
     void set(int item, int index) override;
     void removeAll() override;
 
-    int getMemoryBlockSize() override;
-    int getMemoryBlockCapacity() override;
+    size_t getMemoryBlockSize() override;
+    size_t getMemoryBlockCapacity() override;
 
 protected:
-    int length = 0;
-    int memoryBlockCount = 1;
+    size_t length = 0;
+    size_t memoryBlockCount = 1;
     MemoryBlock* lastMemoryBlock = new MemoryBlock();
 
     MemoryBlock* getMemoryBlock(int index);

@@ -1,6 +1,8 @@
 #ifndef ALLOCATOR_ARRAY_H
 #define ALLOCATOR_ARRAY_H
 
+#include <cstddef>
+
 class Array
 {
 public:
@@ -13,7 +15,7 @@ public:
     virtual void set(int item, int index) = 0;
     virtual void removeAll() = 0;
 
-    virtual int getLength() = 0;
+    virtual size_t getLength() = 0;
 };
 
 #endif // ALLOCATOR_ARRAY_H

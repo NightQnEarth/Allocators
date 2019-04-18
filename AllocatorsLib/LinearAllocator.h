@@ -9,7 +9,7 @@ public:
     LinearAllocator();
     ~LinearAllocator() override;
 
-    int getLength() override;
+    size_t getLength() override;
     int& operator[] (int index) override;
     void push(int item) override;
     int pop() override;
@@ -17,17 +17,17 @@ public:
     void set(int item, int index) override;
     void removeAll() override;
 
-    int getMemoryBlockSize() override;
-    int getMemoryBlockCapacity() override;
+    size_t getMemoryBlockSize() override;
+    size_t getMemoryBlockCapacity() override;
 
 protected:
     int* memoryBlock;
-    int memoryBlockSize;
-    int length;
-    int capacity;
+    size_t memoryBlockSize;
+    size_t length;
+    size_t capacity;
 
     void enlargeBlock();
-    void resizeBlock(bool enlarge, int addingBytesCount, bool saveValues = true);
+    void resizeBlock(bool enlarge, size_t addingBytesCount, bool saveValues = true);
 };
 
 #endif //ALLOCATOR_LINEARALLOCATOR_H

@@ -12,8 +12,8 @@ public:
     MemoryBlock();
     ~MemoryBlock() override;
 
-    int getMemoryBlockSize() override;
-    int getMemoryBlockCapacity() override;
+    size_t getMemoryBlockSize() override;
+    size_t getMemoryBlockCapacity() override;
 };
 
 #endif //ALLOCATORS_MEMORYBLOCK_H

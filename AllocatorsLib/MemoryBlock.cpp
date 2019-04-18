@@ -12,12 +12,12 @@ MemoryBlock::~MemoryBlock()
     free(memoryBlock);
 }
 
-int MemoryBlock::getMemoryBlockSize()
+size_t MemoryBlock::getMemoryBlockSize()
 {
     return PULL_SIZE;
 }
 
-int MemoryBlock::getMemoryBlockCapacity()
+size_t MemoryBlock::getMemoryBlockCapacity()
 {
     return getMemoryBlockSize() / sizeof(int);
 }
