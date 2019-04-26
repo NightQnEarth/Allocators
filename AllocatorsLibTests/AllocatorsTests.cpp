@@ -1,8 +1,4 @@
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "cert-err58-cpp"
-
 #include "gtest/gtest.h"
-#include <gmock/gmock.h>
 #include "../AllocatorsLib/StackAllocator.h"
 #include "../AllocatorsLib/LinkedListAllocator.h"
 
@@ -148,5 +144,3 @@ TEST_F(Allocators, length_not_reduce)
         ASSERT_EQ(allocator->getLength(), startCapacity);
     }
 }
-
-#pragma clang diagnostic pop
